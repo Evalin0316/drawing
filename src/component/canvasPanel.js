@@ -1,17 +1,16 @@
 import React, { useRef } from 'react';
-// import Row from './Row';
+import Row from './rowField';
 
 // import '../styles/drawingPanel.scss';
 
-function CanvasPanel({ width, height, selectedColor }) {
+function CanvasPanel({ width, height, color }) {
   const componentRef = useRef();
-  
   
   let rows = [];
 
-  // for (let i = 0; i < height; i++) {
-  //   rows.push(<Row key={i} width={width}  selectedColor={selectedColor} />)
-  // }
+  for (let i = 0; i < height; i++) {
+    rows.push(<Row key={i} width={width} color={color} />)
+  }
 
   return (
     <div id="drawing-panel">

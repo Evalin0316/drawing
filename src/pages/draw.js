@@ -1,10 +1,13 @@
 import React,{ useState } from 'react';
-import ColorPicker from '../component/colorPick';
+// import ColorPicker from '../component/colorPick';
 import CanvasPanel from '../component/canvasPanel';
+import { HexColorPicker } from "react-colorful";
 
 const Draw = () => {
     const [canvasWidth, setCanvasWidth] = useState(160);
     const [canvasHeight, setCanvasHeight] = useState(160);
+    // const [selectedColor, setSelectedColor] = useState('#aabbcc');
+    const [color, setColor] = useState("#aabbcc");
 
     return(
         <>
@@ -19,15 +22,21 @@ const Draw = () => {
                 </div>
                 <div>
                     <input
-                    type='number' 
-                    className='panelInput' 
-                    defaultValue={canvasHeight}
-                    onChange={(e)=>setCanvasHeight(e.target.value)}
+                      type='number' 
+                      className='panelInput' 
+                      defaultValue={canvasHeight}
+                      onChange={(e)=>setCanvasHeight(e.target.value)}
                     />
                 </div>
-                <ColorPicker />
+                <HexColorPicker color={color} onChange={setColor} />
             </div>
-            <div><CanvasPanel/></div>
+            <div>
+              <CanvasPanel
+                width={canvasWidth}
+                height={canvasHeight}
+                color={color}
+              />
+            </div>
         </>
     )
 
