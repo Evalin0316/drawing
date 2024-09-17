@@ -1,45 +1,57 @@
-import React,{ useState } from 'react';
-// import ColorPicker from '../component/colorPick';
+import React, { useState, useCallback } from 'react';
 import CanvasPanel from '../component/canvasPanel';
 import { HexColorPicker } from "react-colorful";
+import '../style/draw.css';
 
 const Draw = () => {
-    const [canvasWidth, setCanvasWidth] = useState(160);
-    const [canvasHeight, setCanvasHeight] = useState(160);
-    // const [selectedColor, setSelectedColor] = useState('#aabbcc');
+    const [canvasWidth, setCanvasWidth] = useState(16);
+    const [canvasHeight, setCanvasHeight] = useState(16);
     const [color, setColor] = useState("#aabbcc");
+    const [clearAll, setClearAll] = useState(false);
 
-    return(
-        <>
-            <div style={{display:'flex', flexDirection:'column', width:'500px', alignItems:'flex-start'}}>
-                <div>
+    const handleClearAll = useCallback(() => {
+      setClearAll(prev => !prev);
+  }, [clearAll]);
+
+    return (
+        <div className="draw-container">
+            <div className="canvas-wrapper">
+                <CanvasPanel
+                    width={canvasWidth}
+                    height={canvasHeight}
+                    color={color}
+                    clearAll={clearAll}
+                    setClearAll={setClearAll}
+                />
+            </div>
+            <div className="controls-wrapper">
+                <div className="input-group">
+                    <label htmlFor="width-input">寬度:</label>
                     <input
-                    type='number' 
-                    className='panelInput' 
-                    defaultValue={canvasWidth}
-                    onChange={(e)=>setCanvasWidth(e.target.value)}
+                        id="width-input"
+                        type='number'
+                        className='panel-input'
+                        value={canvasWidth}
+                        onChange={(e) => setCanvasWidth(Number(e.target.value))}
                     />
                 </div>
-                <div>
+                <div className="input-group">
+                    <label htmlFor="height-input">高度:</label>
                     <input
-                      type='number' 
-                      className='panelInput' 
-                      defaultValue={canvasHeight}
-                      onChange={(e)=>setCanvasHeight(e.target.value)}
+                        id="height-input"
+                        type='number'
+                        className='panel-input'
+                        value={canvasHeight}
+                        onChange={(e) => setCanvasHeight(Number(e.target.value))}
                     />
                 </div>
-                <HexColorPicker color={color} onChange={setColor} />
+                <div className='button-outline' onClick={handleClearAll}>Clear All</div>
+                <div className="color-picker-wrapper">
+                    <HexColorPicker color={color} onChange={setColor} />
+                </div>
             </div>
-            <div>
-              <CanvasPanel
-                width={canvasWidth}
-                height={canvasHeight}
-                color={color}
-              />
-            </div>
-        </>
-    )
-
+        </div>
+    );
 }
 
-export default Draw ;
+export default Draw;

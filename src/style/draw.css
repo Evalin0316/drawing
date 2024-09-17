@@ -1,0 +1,41 @@
+.draw-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 30px;
+    background: rgb(244, 246, 240);
+}
+
+.canvas-wrapper {
+    flex: 1;
+    max-width: 80%;
+}
+
+.controls-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 300px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.panel-input {
+    width: 100%;
+    padding: 5px;
+}
+
+.color-picker-wrapper {
+    margin-top: 10px;
+}
+
+.button-outline{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}

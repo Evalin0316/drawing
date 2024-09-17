@@ -1,38 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const Row = (props) => {
-  const { width, color }  = props;
-  const [pixelColor, setPixelColor] = useState('#fff'); // 設置初始顏色
+const Row = ({ width, color, clearAll, setClearAll }) => {
+  const [pixelColors, setPixelColors] = useState(Array(width).fill('#fff'));
 
-  const applyColor = () => {
-    setPixelColor(color);  // 點擊後設置成傳遞的顏色
+  const handleClick = (index) => {
+    const newColors = [...pixelColors];
+    newColors[index] = color;
+    setPixelColors(newColors);
   }
 
-  const removeColor = () => {
-    setPixelColor('#fff');  // 雙擊後設置成白色
+  const handleDoubleClick = (index) => {
+    const newColors = [...pixelColors];
+    newColors[index] = '#fff';
+    setPixelColors(newColors);
   }
 
-  // 渲染方塊
-  const renderBlocks = () => {
-    const blocks = [];
-    for (let i = 0; i < width; i++) {
-      blocks.push(
-        <div
-          key={i} // 每個子元素應有唯一鍵值
-          className='block'
-          style={{ 'backgroundColor': pixelColor, 'width': '1.5rem', 'height': '1.5rem', cursor: 'pointer' }}
-          onClick={applyColor}
-          onDoubleClick={removeColor}
-        >
-        </div>
-      );
+  useEffect(() => {
+    if (clearAll) {
+      setPixelColors(Array(width).fill('#fff'));
+      setClearAll(false);
     }
-    return blocks;
-  }
+  }, [clearAll]);
+
+  const blockStyle = {
+    width: '1.5rem',
+    height: '1.5rem',
+    cursor: 'pointer'
+  };
 
   return (
-    <div className='row' style={{ 'display':'flex', 'width':'fit-content' }}>
-      {renderBlocks()}  {/* 渲染方塊 */}
+    <div className='row' style={{ display: 'flex', width: 'fit-content' }}>
+      {Array.from({ length: width }, (_, index) => (
+        <div
+          key={index}
+          className='block'
+          style={{ ...blockStyle, backgroundColor: pixelColors[index] }}
+          onClick={() => handleClick(index)}
+          onDoubleClick={() => handleDoubleClick(index)}
+        />
+      ))}
     </div>
   );
 }

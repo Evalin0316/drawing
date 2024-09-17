@@ -1,15 +1,13 @@
 import React, { useRef } from 'react';
 import Row from './rowField';
 
-// import '../styles/drawingPanel.scss';
-
-function CanvasPanel({ width, height, color }) {
+function CanvasPanel({ width, height, color, clearAll, setClearAll }) {
   const componentRef = useRef();
   
   let rows = [];
 
   for (let i = 0; i < height; i++) {
-    rows.push(<Row key={i} width={width} color={color} />)
+    rows.push(<Row key={i} width={width} color={color} clearAll={clearAll} setClearAll={setClearAll}/>)
   }
 
   return (
