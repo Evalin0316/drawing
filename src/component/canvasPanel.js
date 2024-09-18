@@ -15,16 +15,6 @@ function CanvasPanel({ width, height, color, clearAll, setClearAll }) {
       <div id="pixels" ref={componentRef}>
         {rows}
       </div>
-      {/* <button 
-        className='button-outline'
-        onClick={() => exportComponentAsPNG(componentRef)}
-      > Export as PNG
-      </button>
-      <button 
-        className='button-outline'
-        onClick={() => exportComponentAsJPEG(componentRef)}
-      > Export as JPG
-      </button> */}
     </div>
   )
 }
