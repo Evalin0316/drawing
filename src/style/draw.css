@@ -3,9 +3,10 @@
     justify-content: center;
     background: rgb(244, 246, 240);
     min-height: 100vh;
+    width: 100vw;
 }
 
-.title{
+.title {
     font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
     font-size: 32px;
 }
@@ -19,36 +20,57 @@
     /* width: 80%; */
 }
 
-/* .canvas-wrapper {
-    flex: 1;
-    max-width: 80%;
-} */
+@media screen and (max-width: 768px) {
+    .draw-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+.canvas-wrapper {
+   width: 100%
+}
 
 .controls-wrapper {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 300px;
+}
+
+.controls-wrapper-title{
+    font-family: fantasy,serif,sans-serif;
+    font-size: 28px;
+    margin-bottom: 12px;
 }
 
 .input-group {
     display: flex;
-    flex-direction: column;
     gap: 5px;
+    align-items: center;
 }
 
 .panel-input {
-    width: 100%;
+    width: 80%;
     padding: 5px;
+    border: 2px solid #ccc;
+    border-radius: 2px;
+}
+
+.text-input{
+    width: 100px;
 }
 
 .color-picker-wrapper {
     margin-top: 10px;
 }
 
-.button-outline{
+.button-outline {
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 5px 10px;
     cursor: pointer;
+}
+
+.button-outline:hover {
+    background: #dddddd73;
 }

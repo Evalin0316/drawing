@@ -30,7 +30,7 @@ const Row = ({ width, color, clearAll, setClearAll }) => {
 
   return (
     <div className='row' style={{ display: 'flex', width: 'fit-content' }}>
-      {Array.from({ length: width }, (_, index) => (
+      {Array.from({ length: width }, (v, index) => (
         <div
           key={index}
           className='block'
