@@ -11,9 +11,11 @@ const Draw = () => {
 
     const handleClearAll = useCallback(() => {
       setClearAll(prev => !prev);
-  }, [clearAll]);
+  }, []);
 
     return (
+    <div className="container">
+        {/* <div className="title">一緒に絵を描くよ</div> */}
         <div className="draw-container">
             <div className="canvas-wrapper">
                 <CanvasPanel
@@ -51,6 +53,7 @@ const Draw = () => {
                 </div>
             </div>
         </div>
+    </div>
     );
 }
 

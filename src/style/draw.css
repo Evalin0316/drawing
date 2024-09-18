@@ -1,15 +1,28 @@
+.container {
+    display: flex;
+    justify-content: center;
+    background: rgb(244, 246, 240);
+    min-height: 100vh;
+}
+
+.title{
+    font-family: 'Hiragino Kaku Gothic Pro', sans-serif;
+    font-size: 32px;
+}
+
 .draw-container {
     display: flex;
     align-items: flex-start;
     gap: 20px;
     padding: 30px;
     background: rgb(244, 246, 240);
+    /* width: 80%; */
 }
 
-.canvas-wrapper {
+/* .canvas-wrapper {
     flex: 1;
     max-width: 80%;
-}
+} */
 
 .controls-wrapper {
     display: flex;

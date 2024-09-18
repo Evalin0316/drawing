@@ -20,7 +20,7 @@ const Row = ({ width, color, clearAll, setClearAll }) => {
       setPixelColors(Array(width).fill('#fff'));
       setClearAll(false);
     }
-  }, [clearAll]);
+  }, [clearAll, setClearAll, width]);
 
   const blockStyle = {
     width: '1.5rem',
