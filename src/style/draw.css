@@ -74,3 +74,15 @@
 .button-outline:hover {
     background: #dddddd73;
 }
+
+.input-group-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}

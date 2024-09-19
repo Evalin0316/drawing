@@ -8,16 +8,32 @@ const Draw = () => {
     const [canvasHeight, setCanvasHeight] = useState(16);
     const [color, setColor] = useState("#aabbcc");
     const [clearAll, setClearAll] = useState(false);
+    const [widthError, setWidthError] = useState(false);
+    const [heightError, setHeightError] = useState(false);
 
     const handleClearAll = useCallback(() => {
       setClearAll(prev => !prev);
   }, []);
+  
 
   const handleChangeWidth = (value) => {
-    if(value < 100){
-      setCanvasWidth(value);
+    if (value <= 100) {
+        setCanvasWidth(value);
+        setWidthError(false);
+    } else {
+        setWidthError(true);
     }
-  }
+}
+
+const handleChangeHeight = (value) => {
+    if (value <= 100) {
+        setCanvasHeight(value);
+        setHeightError(false);
+    } else {
+        setHeightError(true);
+    }
+}
+
 
     return (
     <div className='container'>
@@ -34,25 +50,31 @@ const Draw = () => {
           </div>
           <div className='controls-wrapper'>
             <div className='controls-wrapper-title'>Setting</div>
-            <div className='input-group'>
-              <label htmlFor='width-input' className='text-input'>寬度:</label>
-              <input
-                id='width-input'
-                type='number'
-                className='panel-input'
-                value={canvasWidth}
-                onChange={(e) => handleChangeWidth(Number(e.target.value))}
-              />
+            <div className='input-group-wrapper'>
+              <div className='input-group'>
+                <label htmlFor='width-input' className='text-input'>寬度:</label>
+                <input
+                  id='width-input'
+                  type='text'
+                  className='panel-input'
+                  value={canvasWidth}
+                  onChange={(e) => handleChangeWidth(Number(e.target.value))}
+                />
+              </div>
+              {widthError && <span className="error-text">寬度不能超過100</span>}
             </div>
-            <div className='input-group'>
-              <label htmlFor='height-input' className='text-input'>高度:</label>
-              <input
-                id='height-input'
-                type='number'
-                className='panel-input'
-                value={canvasHeight}
-                onChange={(e) => setCanvasHeight(Number(e.target.value))}
-              />
+            <div className='input-group-wrapper'>
+              <div className='input-group'>
+                <label htmlFor='height-input' className='text-input'>高度:</label>
+                <input
+                  id='height-input'
+                  type='text'
+                  className='panel-input'
+                  value={canvasHeight}
+                  onChange={(e) => handleChangeHeight(Number(e.target.value))}
+                />
+              </div>
+              {heightError && <span className="error-text">高度不能超過100</span>}
             </div>
             <div className='button-outline' onClick={handleClearAll}>Clear All</div>
             <div className='color-picker-wrapper'>
