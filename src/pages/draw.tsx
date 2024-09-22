@@ -16,8 +16,8 @@ const Draw = () => {
   }, []);
   
 
-  const handleChangeWidth = (value) => {
-    if (value <= 100) {
+  const handleChangeWidth = (value: number) => {
+    if (value <= 50) {
         setCanvasWidth(value);
         setWidthError(false);
     } else {
@@ -25,8 +25,8 @@ const Draw = () => {
     }
 }
 
-const handleChangeHeight = (value) => {
-    if (value <= 100) {
+const handleChangeHeight = (value: number) => {
+    if (value <= 50) {
         setCanvasHeight(value);
         setHeightError(false);
     } else {
@@ -61,7 +61,7 @@ const handleChangeHeight = (value) => {
                   onChange={(e) => handleChangeWidth(Number(e.target.value))}
                 />
               </div>
-              {widthError && <span className="error-text">寬度不能超過100</span>}
+              {widthError && <span className="error-text">寬度不能超過50</span>}
             </div>
             <div className='input-group-wrapper'>
               <div className='input-group'>
@@ -74,7 +74,7 @@ const handleChangeHeight = (value) => {
                   onChange={(e) => handleChangeHeight(Number(e.target.value))}
                 />
               </div>
-              {heightError && <span className="error-text">高度不能超過100</span>}
+              {heightError && <span className="error-text">高度不能超過50</span>}
             </div>
             <div className='button-outline' onClick={handleClearAll}>Clear All</div>
             <div className='color-picker-wrapper'>

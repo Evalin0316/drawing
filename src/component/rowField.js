@@ -25,7 +25,8 @@ const Row = ({ width, color, clearAll, setClearAll }) => {
   const blockStyle = {
     width: '1.5rem',
     height: '1.5rem',
-    cursor: 'pointer'
+    cursor: 'pointer',
+    border: '1px solid #ccc'
   };
 
   return (
