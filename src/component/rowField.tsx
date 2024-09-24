@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
-const Row = ({ width, color, clearAll, setClearAll }) => {
+interface RowProps {
+  width: number;
+  color: string;
+  clearAll: boolean;
+  setClearAll: (value: boolean) => void;
+}
+
+const Row = ({ width, color, clearAll, setClearAll }: RowProps) => {
   const [pixelColors, setPixelColors] = useState(Array(width).fill('#fff'));
 
-  const handleClick = (index) => {
+  const handleClick = (index: number) => {
     const newColors = [...pixelColors];
     newColors[index] = color;
     setPixelColors(newColors);
   }
 
-  const handleDoubleClick = (index) => {
+  const handleDoubleClick = (index: number) => {
     const newColors = [...pixelColors];
     newColors[index] = '#fff';
     setPixelColors(newColors);

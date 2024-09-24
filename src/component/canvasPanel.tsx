@@ -3,13 +3,20 @@ import Row from './rowField';
 import { exportComponentAsJPEG, exportComponentAsPNG } from 'react-component-export-image';
 import '../style/canvasPanel.css';
 
-function CanvasPanel({ width, height, color, clearAll, setClearAll }) {
-  const componentRef = useRef();
-  
-  let rows = [];
+interface CanvasPanelProps {
+  width: number;
+  height: number;
+  color: string;
+  clearAll: boolean;
+  setClearAll: (value: boolean) => void;
+}
 
+function CanvasPanel({ width, height, color, clearAll, setClearAll }: CanvasPanelProps) {
+  const componentRef = useRef<HTMLDivElement>(null);
+  
+  let rows: Array<JSX.Element> = [];
   for (let i = 0; i < height; i++) {
-    rows.push(<Row key={i} width={width} color={color} clearAll={clearAll} setClearAll={setClearAll}/>)
+    rows.push(<Row key={i} width={width} color={color} clearAll={clearAll} setClearAll={setClearAll} />)
   }
 
   return (

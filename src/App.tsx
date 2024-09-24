@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import Draw from './pages/draw.tsx'
+import Draw from './pages/draw'
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className='App'>
       <Draw />
