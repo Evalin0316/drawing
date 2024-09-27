@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Row from './rowField';
-import { exportComponentAsJPEG, exportComponentAsPNG } from 'react-component-export-image';
 import '../style/canvasPanel.css';
+import convertToImage from '../utils/convertToImage';
 
 interface CanvasPanelProps {
   width: number;
@@ -28,10 +28,10 @@ function CanvasPanel({ width, height, color, clearAll, setClearAll }: CanvasPane
       </div>
       <div className='button-section'>
         <div>
-          <div className='button-export' onClick={() => exportComponentAsJPEG(componentRef)}>export JPEG</div>
+          <div className='button-export' onClick={() => convertToImage('pixels', 'jpg')}>export JPEG</div>
         </div>
         <div>
-          <div className='button-export' onClick={() => exportComponentAsPNG(componentRef)}>export PNG</div>
+          <div className='button-export' onClick={() => convertToImage('pixels', 'png')}>export PNG</div>
         </div>
       </div>
     </>

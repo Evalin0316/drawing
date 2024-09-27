@@ -4,35 +4,35 @@ import { HexColorPicker } from "react-colorful";
 import '../style/draw.css';
 
 const Draw = () => {
-    const [canvasWidth, setCanvasWidth] = useState(16);
-    const [canvasHeight, setCanvasHeight] = useState(16);
-    const [color, setColor] = useState("#aabbcc");
-    const [clearAll, setClearAll] = useState(false);
-    const [widthError, setWidthError] = useState(false);
-    const [heightError, setHeightError] = useState(false);
+    const [canvasWidth, setCanvasWidth] = useState<number>(16);
+    const [canvasHeight, setCanvasHeight] = useState<number>(16);
+    const [color, setColor] = useState<string>("#aabbcc");
+    const [clearAll, setClearAll] = useState<boolean>(false);
+    const [widthError, setWidthError] = useState<boolean>(false);
+    const [heightError, setHeightError] = useState<boolean>(false);
 
     const handleClearAll = useCallback(() => {
       setClearAll(prev => !prev);
   }, []);
   
 
-  const handleChangeWidth = (value: number) => {
-    if (value <= 50) {
-        setCanvasWidth(value);
-        setWidthError(false);
-    } else {
-        setWidthError(true);
+    const handleChangeWidth = (value: number) => {
+      if (value <= 50) {
+          setCanvasWidth(value);
+          setWidthError(false);
+      } else {
+          setWidthError(true);
+      }
     }
-}
 
-const handleChangeHeight = (value: number) => {
-    if (value <= 50) {
-        setCanvasHeight(value);
-        setHeightError(false);
-    } else {
-        setHeightError(true);
+    const handleChangeHeight = (value: number) => {
+        if (value <= 50) {
+            setCanvasHeight(value);
+            setHeightError(false);
+        } else {
+            setHeightError(true);
+        }
     }
-}
 
 
     return (
