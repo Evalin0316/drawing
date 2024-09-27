@@ -8,7 +8,7 @@ interface RowProps {
 }
 
 const Row = ({ width, color, clearAll, setClearAll }: RowProps) => {
-  const [pixelColors, setPixelColors] = useState(Array(width).fill('#fff'));
+  const [pixelColors, setPixelColors] = useState<string[]>(Array(width).fill('#fff'));
 
   const handleClick = (index: number) => {
     const newColors = [...pixelColors];
@@ -33,7 +33,7 @@ const Row = ({ width, color, clearAll, setClearAll }: RowProps) => {
     width: '1.5rem',
     height: '1.5rem',
     cursor: 'pointer',
-    border: '1px solid #ccc'
+    border: '0.5px solid #ccc'
   };
 
   return (
