@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import Row from './rowField';
-import '../style/canvasPanel.css';
 import convertToImage from '../utils/convertToImage';
+import 'style/canvasPanel.css';
 
 interface CanvasPanelProps {
   width: number;
