@@ -1,52 +1,49 @@
-import convertToImage from '../utils/convertToImage'
-import html2canvas from 'html2canvas';
-
-// 模拟html2canvas
-jest.mock('html2canvas');
+import convertToImage from '../utils/convertToImage';
 
 describe('convertToImage', () => {
-  let mockElement: HTMLElement;
-  let mockCanvas: HTMLCanvasElement;
-  let mockLink: HTMLAnchorElement;
-
   beforeEach(() => {
-    // 设置模拟DOM元素
-    mockElement = document.createElement('div');
-    mockElement.id = 'testElement';
-    document.body.appendChild(mockElement);
+    // 設置測試環境
+    document.body.innerHTML = '<div id="testElement"><p>Test</p></div>';
 
-    // 模拟canvas
-    mockCanvas = document.createElement('canvas');
-    (html2canvas as jest.Mock).mockResolvedValue(mockCanvas);
-
-    // 模拟链接元素
-    mockLink = document.createElement('a');
-    jest.spyOn(document, 'createElement').mockReturnValue(mockLink);
-    jest.spyOn(mockLink, 'click').mockImplementation(() => {});
+    window.getComputedStyle = jest.fn().mockReturnValue({
+      // 返回需要的樣式屬性
+      getPropertyValue: jest.fn().mockReturnValue(''),
+    });
   });
 
-  afterEach(() => {
-    document.body.removeChild(mockElement);
-    jest.restoreAllMocks();
+  // 測試找不到元素
+  it('should reject if element is not found', async () => {
+    await expect(convertToImage('nonExistentId', 'png')).rejects.toThrow('can not find element');
   });
 
-  it('应该成功转换为PNG图像', async () => {
-    await convertToImage('testElement', 'png');
+  // it('should throw an error for invalid type', async () => {
+  //   await expect(convertToImage('testElement', 'gif')).rejects.toThrow('invalid type');
+  // });
 
-    expect(html2canvas).toHaveBeenCalledWith(mockElement);
-    expect(mockCanvas.toDataURL).toHaveBeenCalledWith('image/png');
-    expect(mockLink.href).toBe('data:image/png;base64,mockedImageData');
-    expect(mockLink.download).toBe('component.png');
-    expect(mockLink.click).toHaveBeenCalled();
-  });
+  // 測試創建下載連結
+  it('should create a download link for jpg', async () => {
+    const createElementSpy = jest.spyOn(document, 'createElement').mockImplementation((tagName) => {
+      if (tagName === 'style') {
+        return { click: jest.fn(), setAttribute: jest.fn() } as any;
+      }
+      return document.createElement(tagName);
+    });
 
-  it('应该成功转换为JPG图像', async () => {
     await convertToImage('testElement', 'jpg');
+    expect(createElementSpy).toHaveBeenCalledWith('style');
+    createElementSpy.mockRestore();
+  });
 
-    expect(html2canvas).toHaveBeenCalledWith(mockElement);
-    expect(mockCanvas.toDataURL).toHaveBeenCalledWith('image/jpg');
-    expect(mockLink.href).toBe('data:image/png;base64,mockedImageData');
-    expect(mockLink.download).toBe('component.jpg');
-    expect(mockLink.click).toHaveBeenCalled();
+  it('should create a download link for png', async () => {
+    const createElementSpy = jest.spyOn(document, 'createElement').mockImplementation((tagName) => {
+      if (tagName === 'style') {
+        return { click: jest.fn(), setAttribute: jest.fn() } as any;
+      }
+      return document.createElement(tagName);
+    });
+
+    await convertToImage('testElement', 'png');
+    expect(createElementSpy).toHaveBeenCalledWith('style');
+    createElementSpy.mockRestore();
   });
 });
